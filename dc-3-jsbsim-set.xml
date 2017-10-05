@@ -6,5 +6,9 @@
     <author>BARANGER Emmanuel, PAF team</author>
   </sim>
 
+    <damage>
+      <file>Aircraft/Douglas-Dc3/Nasal/damage.nas</file>
+    </damage>
+
 </PropertyList>
 
