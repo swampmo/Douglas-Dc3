@@ -24,6 +24,7 @@ var cannon_types = {
     " GSh-23 hit":            0.065,# 23mm
     " 7.62 hit":              0.005,# 7.62mm
     " 50 BMG hit":            0.015,# 12.7mm
+    " S-5 rocket hit":        0.20, #55mm
 };
     
     
@@ -55,10 +56,14 @@ var warhead_lbs = {
     "SCALP":               992.00,
     "KN-06":               315.00,
     "GBU12":               190.00,
+    "GBU-12":              190.00,
     "GBU16":               450.00,
     "Sea Eagle":           505.00,
     "SeaEagle":            505.00,
     "AGM65":               200.00,
+    "AGM-65":              126.00,
+    "AGM-84":              488.00,
+    "AGM-88":              146.00,
     "RB-04E":              661.00,
     "RB-05A":              353.00,
     "RB-75":               126.00,
@@ -72,10 +77,30 @@ var warhead_lbs = {
     "AIM132":               22.05,
     "ALARM":               450.00,
     "STORMSHADOW":         850.00,
+    "S-21":                245.00,
+    "S-24":                271.00,
+    "Kh-66":               244.71,
+    "RS-2US":               28.66,
+    "R-55":                 20.06,
+    "R-3S":                 16.31,
+    "R-3R":                 16.31,
+    "R-13M":                16.31,
     "R-60":                  6.60,
+    "R-60M":                 7.70,
     "R-27R1":               85.98,
     "R-27T1":               85.98,
-    "FAB-500":             564.00,
+    "R-73E":                16.31,
+    "R-77":                 49.60,
+    "RN-14T":              800.00, #fictional, thermobaeric replacement for the RN-24 nuclear bomb
+    "RN-18T":             1200.00, #fictional, thermobaeric replacement for the RN-28 nuclear bomb
+    "ZB-250":              236.99,
+    "ZB-500":              473.99,
+    "KH-25MP":             197.53,
+    "FAB-100":              92.59,
+    "OFAB-100":             92.59,
+    "FAB-250":             202.85,
+    "FAB-500":             564.38,
+    "KAB-500":             564.38,
     "Exocet":              364.00,
     "HVAR":                  7.50,#P51
 };
@@ -95,6 +120,7 @@ var fireMsgs = {
     " Bombs away at": nil, # bombs
     " Bruiser at":    nil, # anti-ship
     " Rifle at":      nil, # TV guided
+    " Sniper at":     nil, # anti-radiation
 
     # SAM and missile frigate
     " Bird away at":  nil, # G/A
@@ -120,6 +146,8 @@ var incoming_listener = func {
       var m2000 = FALSE;
       if (find(" at " ~ callsign ~ ". Release ", last_vector[1]) != -1) {
         # a m2000 is firing at us
+        m2000 = TRUE;
+      } elsif (find(" Maddog released", last_vector[1]) != -1) {
         m2000 = TRUE;
       }
       if (contains(fireMsgs, last_vector[1]) or m2000 == TRUE) {
@@ -172,12 +200,13 @@ var incoming_listener = func {
                 } else {
                   playIncomingSound("");
                 }
+                setLaunch(author);
                 return;
               }
             }
           }
         }
-      } elsif (1==1) { # mirage: getprop("/controls/armament/mp-messaging")
+      } elsif (getprop("payload/armament/msg")) { # mirage: getprop("/controls/armament/mp-messaging")
         # latest version of failure manager and taking damage enabled
         #print("damage enabled");
         var last1 = split(" ", last_vector[1]);
@@ -295,6 +324,15 @@ var stopIncomingSound = func (clock) {
   setprop("sound/incoming"~clock, 0);
 }
 
+var setLaunch = func (e) {
+  setprop("sound/rwr-launch", e);
+  settimer(func {stopLaunch();},7);
+}
+
+var stopLaunch = func () {
+  setprop("sound/rwr-launch", "");
+}
+
 var callsign_struct = {};
 var getCallsign = func (callsign) {
   var node = callsign_struct[callsign];
@@ -344,4 +382,4 @@ var re_init = func {
   }
 }
 
-setlistener("/sim/signals/reinit", re_init, 0, 0);
+#setlistener("/sim/signals/reinit", re_init, 0, 0);
