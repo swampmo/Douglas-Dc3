@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- 
+<!--
      ************************************************************************
       Douglas DC-3 C47
       January 2011 BARANGER Emmanuel
@@ -18,7 +18,7 @@
     <startup>
       <splash-texture>Aircraft/Douglas-Dc3/dc-3-splash.png</splash-texture>
     </startup>
-    
+
     <!-- freeze fuel = false: fuel consumption calculated by the FDM -->
     <freeze>
       <fuel type="bool">false</fuel>
@@ -98,33 +98,21 @@
        <tank n="4">
       <name>Carb LH</name>
         <capacity unit="LBS"> 0.5 </capacity>
-        <contents unit="LBS"> 0 </contents>    
+        <contents unit="LBS"> 0 </contents>
       </tank>
       <tank n="5">
       <name>Carb RH</name>
         <capacity unit="LBS"> 0.5 </capacity>
-        <contents unit="LBS"> 0 </contents>    
+        <contents unit="LBS"> 0 </contents>
       </tank>
     </fuel>
   </consumables>
 
-  <!-- ################################################### -->
-  <!-- ######## DUAL CONTROL and FUEL Management ######### -->
-  <nasal>    
-    <dual_control_tools>
-      <file>Aircraft/Douglas-Dc3/DualControl/dual-control-tools.nas</file>
-    </dual_control_tools>
-    <aircraft_dual_control>
-      <file>Aircraft/Douglas-Dc3/DualControl/dc-3-dual-control.nas</file>
-    </aircraft_dual_control>
-    <dual_control>
-      <file>Aircraft/Douglas-Dc3/DualControl/pilot-dual-control.nas</file>
-    </dual_control>
+
+  <nasal>
     <fuel>
       <file>Aircraft/Douglas-Dc3/Nasal/fuel-jsbsim.nas</file>
     </fuel>
   </nasal>
-  <!-- ######## DUAL CONTROL and FUEL Management ######### -->
-  <!-- ################################################### -->
-    
+
 </PropertyList>

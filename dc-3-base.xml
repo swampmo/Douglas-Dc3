@@ -2,7 +2,7 @@
 
 <PropertyList>
 
-<!-- 
+<!--
      ************************************************************************
      Douglas DC-3 C47
      January 2011 BARANGER Emmanuel
@@ -10,15 +10,15 @@
      ************************************************************************
 -->
 
-  <sim> 
+  <sim>
     <author>BARANGER Emmanuel (3D), PAF Team (Systems,3D,FDM)</author>
     <aircraft-version>1.0</aircraft-version>
     <status>Alpha</status>
-   
+
     <fuel-fraction>0.8</fuel-fraction>
 
     <tutorials include="Tutorials/dc-3-tutorials.xml"/>
-  
+
     <flaps>
       <setting>0.00</setting>
       <setting>0.25</setting>
@@ -406,6 +406,13 @@
     <keyboard include="Nasal/dc-3-keyboard.xml"/>
   </input>
 
+  <payload>
+    <armament>
+      <msg type="bool">true</msg>
+    </armament>
+  </payload>
+
+
   <nasal>
     <doors>
       <file>Aircraft/Douglas-Dc3/Nasal/doors.nas</file>
@@ -423,8 +430,9 @@
       <file>Aircraft/Douglas-Dc3/Nasal/hydraulic.nas</file>
       <file>Aircraft/Douglas-Dc3/Nasal/wipers.nas</file>
     </dc3>
+
     <damage>
-      <file>Aircraft/Douglas-Dc3/Nasal/damage.nas</file>
+      <file>Aircraft/P47/Nasal/damage.nas</file>
     </damage>
 
     <chronograph>
@@ -436,4 +444,3 @@
   </nasal>
 
 </PropertyList>
-
